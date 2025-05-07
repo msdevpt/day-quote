@@ -1,104 +1,233 @@
 {
-    "citacoes": [
-      {
-        "id": 1,
-        "title": "Mente Serena",
-        "description": "A paz vem de dentro de você mesmo. Não a procure à sua volta."
-      },
-      {
-        "id": 2,
-        "title": "Persistência",
-        "description": "A persistência é o caminho do êxito."
-      },
-      {
-        "id": 3,
-        "title": "Presente",
-        "description": "Não deixe para amanhã o sorriso que você pode dar hoje."
-      },
-      {
-        "id": 4,
-        "title": "Sabedoria",
-        "description": "Conhecer a si mesmo é o começo de toda sabedoria."
-      },
-      {
-        "id": 5,
-        "title": "Mudança",
-        "description": "Seja a mudança que você deseja ver no mundo."
-      },
-      {
-        "id": 6,
-        "title": "Superação",
-        "description": "A maior glória não é nunca cair, mas sim levantar-se sempre."
-      },
-      {
-        "id": 7,
-        "title": "Caminho",
-        "description": "O caminho é a recompensa."
-      },
-      {
-        "id": 8,
-        "title": "Felicidade",
-        "description": "A felicidade não é algo pronto. Ela vem de suas próprias ações."
-      },
-      {
-        "id": 9,
-        "title": "Humildade",
-        "description": "Quanto mais sei, mais sei que nada sei."
-      },
-      {
-        "id": 10,
-        "title": "Aceitação",
-        "description": "O segredo da felicidade está em olhar todas as maravilhas do mundo e nunca se esquecer da sua própria dignidade."
-      },
-      {
-        "id": 11,
-        "title": "Gratidão",
-        "description": "A gratidão transforma o que temos em suficiente, e mais."
-      },
-      {
-        "id": 12,
-        "title": "Simplicidade",
-        "description": "A simplicidade é o último grau de sofisticação."
-      },
-      {
-        "id": 13,
-        "title": "Silêncio",
-        "description": "No silêncio das suas meditações está a resposta para todas as suas perguntas."
-      },
-      {
-        "id": 14,
-        "title": "Compaixão",
-        "description": "Se você quer que os outros sejam felizes, pratique a compaixão. Se você quer ser feliz, pratique a compaixão."
-      },
-      {
-        "id": 15,
-        "title": "Resiliência",
-        "description": "Você nunca sabe que resultados virão da sua ação. Mas se você não fizer nada, não existirão resultados."
-      },
-      {
-        "id": 16,
-        "title": "Paciência",
-        "description": "A paciência é amarga, mas seus frutos são doces."
-      },
-      {
-        "id": 17,
-        "title": "Equilíbrio",
-        "description": "O equilíbrio não é algo que você encontra, é algo que você cria."
-      },
-      {
-        "id": 18,
-        "title": "Propósito",
-        "description": "O propósito da vida é uma vida com propósito."
-      },
-      {
-        "id": 19,
-        "title": "Transcendência",
-        "description": "Não existe caminho para a paz. A paz é o caminho."
-      },
-      {
-        "id": 20,
-        "title": "Bondade",
-        "description": "Nenhum ato de bondade, por menor que seja, é desperdiçado."
-      }
-    ]
-  }
+  "pt": [
+    {
+      "id": 1,
+      "titulo": "Mente Serena",
+      "descricao": "A paz vem de dentro de você mesmo. Não a procure à sua volta."
+    },
+    {
+      "id": 2,
+      "titulo": "Persistência",
+      "descricao": "A persistência é o caminho do êxito."
+    },
+    {
+      "id": 3,
+      "titulo": "Presente",
+      "descricao": "Não deixe para amanhã o sorriso que você pode dar hoje."
+    },
+    {
+      "id": 4,
+      "titulo": "Sabedoria",
+      "descricao": "Conhecer a si mesmo é o começo de toda sabedoria."
+    },
+    {
+      "id": 5,
+      "titulo": "Mudança",
+      "descricao": "Seja a mudança que você deseja ver no mundo."
+    },
+    {
+      "id": 6,
+      "titulo": "Superação",
+      "descricao": "A maior glória não é nunca cair, mas sim levantar-se sempre."
+    },
+    {
+      "id": 7,
+      "titulo": "Caminho",
+      "descricao": "O caminho é a recompensa."
+    },
+    {
+      "id": 8,
+      "titulo": "Felicidade",
+      "descricao": "A felicidade não é algo pronto. Ela vem de suas próprias ações."
+    },
+    {
+      "id": 9,
+      "titulo": "Humildade",
+      "descricao": "Quanto mais sei, mais sei que nada sei."
+    },
+    {
+      "id": 10,
+      "titulo": "Aceitação",
+      "descricao": "O segredo da felicidade está em olhar todas as maravilhas do mundo e nunca se esquecer da sua própria dignidade."
+    },
+    {
+      "id": 11,
+      "titulo": "Gratidão",
+      "descricao": "A gratidão transforma o que temos em suficiente, e mais."
+    },
+    {
+      "id": 12,
+      "titulo": "Simplicidade",
+      "descricao": "A simplicidade é o último grau de sofisticação."
+    },
+    {
+      "id": 13,
+      "titulo": "Silêncio",
+      "descricao": "No silêncio das suas meditações está a resposta para todas as suas perguntas."
+    },
+    {
+      "id": 14,
+      "titulo": "Compaixão",
+      "descricao": "Se você quer que os outros sejam felizes, pratique a compaixão. Se você quer ser feliz, pratique a compaixão."
+    },
+    {
+      "id": 15,
+      "titulo": "Resiliência",
+      "descricao": "Você nunca sabe que resultados virão da sua ação. Mas se você não fizer nada, não existirão resultados."
+    }
+  ],
+  "en": [
+    {
+      "id": 1,
+      "titulo": "Serene Mind",
+      "descricao": "Peace comes from within. Do not seek it without."
+    },
+    {
+      "id": 2,
+      "titulo": "Persistence",
+      "descricao": "Persistence is the path to success."
+    },
+    {
+      "id": 3,
+      "titulo": "Present",
+      "descricao": "Don't put off until tomorrow the smile you can give today."
+    },
+    {
+      "id": 4,
+      "titulo": "Wisdom",
+      "descricao": "To know yourself is the beginning of all wisdom."
+    },
+    {
+      "id": 5,
+      "titulo": "Change",
+      "descricao": "Be the change you wish to see in the world."
+    },
+    {
+      "id": 6,
+      "titulo": "Resilience",
+      "descricao": "The greatest glory is not in never falling, but in rising every time we fall."
+    },
+    {
+      "id": 7,
+      "titulo": "Journey",
+      "descricao": "The journey is the reward."
+    },
+    {
+      "id": 8,
+      "titulo": "Happiness",
+      "descricao": "Happiness is not something ready-made. It comes from your own actions."
+    },
+    {
+      "id": 9,
+      "titulo": "Humility",
+      "descricao": "The more I know, the more I realize I know nothing."
+    },
+    {
+      "id": 10,
+      "titulo": "Acceptance",
+      "descricao": "The secret of happiness is to look at all the wonders of the world and never forget your own dignity."
+    },
+    {
+      "id": 11,
+      "titulo": "Gratitude",
+      "descricao": "Gratitude turns what we have into enough, and more."
+    },
+    {
+      "id": 12,
+      "titulo": "Simplicity",
+      "descricao": "Simplicity is the ultimate sophistication."
+    },
+    {
+      "id": 13,
+      "titulo": "Silence",
+      "descricao": "In the silence of your meditation lies the answer to all your questions."
+    },
+    {
+      "id": 14,
+      "titulo": "Compassion",
+      "descricao": "If you want others to be happy, practice compassion. If you want to be happy, practice compassion."
+    },
+    {
+      "id": 15,
+      "titulo": "Resilience",
+      "descricao": "You never know what results will come of your actions. But if you do nothing, there will be no results."
+    }
+  ],
+  "es": [
+    {
+      "id": 1,
+      "titulo": "Mente Serena",
+      "descricao": "La paz viene de adentro. No la busques afuera."
+    },
+    {
+      "id": 2,
+      "titulo": "Persistencia",
+      "descricao": "La persistencia es el camino al éxito."
+    },
+    {
+      "id": 3,
+      "titulo": "Presente",
+      "descricao": "No dejes para mañana la sonrisa que puedes dar hoy."
+    },
+    {
+      "id": 4,
+      "titulo": "Sabiduría",
+      "descricao": "Conocerte a ti mismo es el principio de toda sabiduría."
+    },
+    {
+      "id": 5,
+      "titulo": "Cambio",
+      "descricao": "Sé el cambio que quieres ver en el mundo."
+    },
+    {
+      "id": 6,
+      "titulo": "Superación",
+      "descricao": "La mayor gloria no está en no caer nunca, sino en levantarse siempre."
+    },
+    {
+      "id": 7,
+      "titulo": "Camino",
+      "descricao": "El camino es la recompensa."
+    },
+    {
+      "id": 8,
+      "titulo": "Felicidad",
+      "descricao": "La felicidad no es algo prefabricado. Viene de tus propias acciones."
+    },
+    {
+      "id": 9,
+      "titulo": "Humildad",
+      "descricao": "Cuanto más sé, más me doy cuenta que no sé nada."
+    },
+    {
+      "id": 10,
+      "titulo": "Aceptación",
+      "descricao": "El secreto de la felicidad es mirar todas las maravillas del mundo y nunca olvidar tu propia dignidad."
+    },
+    {
+      "id": 11,
+      "titulo": "Gratitud",
+      "descricao": "La gratitud convierte lo que tenemos en suficiente, y más."
+    },
+    {
+      "id": 12,
+      "titulo": "Simplicidad",
+      "descricao": "La simplicidad es la máxima sofisticación."
+    },
+    {
+      "id": 13,
+      "titulo": "Silencio",
+      "descricao": "En el silencio de tu meditación está la respuesta a todas tus preguntas."
+    },
+    {
+      "id": 14,
+      "titulo": "Compasión",
+      "descricao": "Si quieres que otros sean felices, practica la compasión. Si quieres ser feliz, practica la compasión."
+    },
+    {
+      "id": 15,
+      "titulo": "Resiliencia",
+      "descricao": "Nunca sabes qué resultados vendrán de tus acciones. Pero si no haces nada, no habrá resultados."
+    }
+  ]
+}

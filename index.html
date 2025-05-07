@@ -56,7 +56,7 @@
         
         .subtitle {
             color: #7f8c8d;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .date {
@@ -80,6 +80,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 5px;
         }
         
         button:hover {
@@ -90,12 +91,49 @@
             font-style: italic;
             color: #7f8c8d;
         }
+        
+        .language-selector {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            padding: 5px 15px;
+            font-size: 14px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            border: 1px solid #bdc3c7;
+        }
+        
+        .language-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        
+        .language-btn:hover:not(.active) {
+            background-color: #d0d3d4;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-style: italic;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Reflexão Diária</h1>
-        <p class="subtitle">Uma citação por dia para inspirar sua jornada</p>
+        <div class="language-selector" id="language-selector">
+            <button class="language-btn active" data-lang="pt">Português</button>
+            <button class="language-btn" data-lang="en">English</button>
+            <button class="language-btn" data-lang="es">Español</button>
+        </div>
+        
+        <h1 id="header">Reflexão Diária</h1>
+        <p class="subtitle" id="subtitle">Uma citação por dia para inspirar sua jornada</p>
         
         <div class="date" id="current-date"></div>
         
@@ -107,70 +145,190 @@
         <button id="new-quote">Nova Citação</button>
         
         <footer>
-            <p>Reflexão Diária &copy; 2025 - Um momento de pausa para contemplação</p>
+            <p id="footer-text">Reflexão Diária &copy; 2025 - Um momento de pausa para contemplação</p>
         </footer>
     </div>
 
     <script>
         // Variável global para armazenar as citações
-        let quotesData = [];
+        let quotes = {};
+        let currentLanguage = 'pt';
+        let isLoading = true;
         
-        // Função para carregar o arquivo JSON
+        // Traduções de interface
+        const uiTranslations = {
+            'pt': {
+                header: 'Reflexão Diária',
+                subtitle: 'Uma citação por dia para inspirar sua jornada',
+                newQuoteBtn: 'Nova Citação',
+                footer: 'Reflexão Diária &copy; 2025 - Um momento de pausa para contemplação',
+                loading: 'Carregando citação...',
+                error: 'Não foi possível carregar as citações. Por favor, tente novamente mais tarde.'
+            },
+            'en': {
+                header: 'Daily Reflection',
+                subtitle: 'A daily quote to inspire your journey',
+                newQuoteBtn: 'New Quote',
+                footer: 'Daily Reflection &copy; 2025 - A moment of pause for contemplation',
+                loading: 'Loading quote...',
+                error: 'Could not load quotes. Please try again later.'
+            },
+            'es': {
+                header: 'Reflexión Diaria',
+                subtitle: 'Una cita diaria para inspirar tu camino',
+                newQuoteBtn: 'Nueva Cita',
+                footer: 'Reflexión Diaria &copy; 2025 - Un momento de pausa para la contemplación',
+                loading: 'Cargando cita...',
+                error: 'No se pudieron cargar las citas. Por favor, inténtelo de nuevo más tarde.'
+            }
+        };
+        
+        // Opções de formatação de data para cada idioma
+        const dateFormatOptions = {
+            'pt': { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+            'en': { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+            'es': { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        };
+        
+        // Função para carregar as citações do arquivo JSON
         async function loadQuotes() {
             try {
+                isLoading = true;
+                updateQuote({ titulo: "", descricao: uiTranslations[currentLanguage].loading });
+                
                 const response = await fetch('quotes.json');
-                const data = await response.json();
-                quotesData = data.citacoes;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                quotes = await response.json();
+                isLoading = false;
                 
                 // Exibir a citação do dia após carregar os dados
-                const dailyQuote = getQuoteOfTheDay();
+                const dailyQuote = getQuoteOfTheDay(currentLanguage);
                 updateQuote(dailyQuote);
             } catch (error) {
                 console.error('Erro ao carregar as citações:', error);
-                document.getElementById('quote-text').textContent = 'Não foi possível carregar as citações. Por favor, tente novamente mais tarde.';
+                isLoading = false;
+                updateQuote({ 
+                    titulo: "Erro", 
+                    descricao: uiTranslations[currentLanguage].error 
+                });
             }
         }
-
-        // Função para exibir a data atual
-        function displayCurrentDate() {
+        
+        // Função para detectar o idioma do navegador
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language.split('-')[0];
+            return ['pt', 'en', 'es'].includes(browserLang) ? browserLang : 'pt'; // Padrão para português se não encontrado
+        }
+        
+        // Função para atualizar a interface de acordo com o idioma
+        function updateUI(lang) {
+            document.getElementById('header').textContent = uiTranslations[lang].header;
+            document.getElementById('subtitle').textContent = uiTranslations[lang].subtitle;
+            document.getElementById('new-quote').textContent = uiTranslations[lang].newQuoteBtn;
+            document.getElementById('footer-text').textContent = uiTranslations[lang].footer;
+            document.querySelector('html').setAttribute('lang', lang);
+            
+            // Atualizar a data
+            displayCurrentDate(lang);
+            
+            // Atualizar a citação se os dados já estiverem carregados
+            if (!isLoading && quotes[lang]) {
+                const dailyQuote = getQuoteOfTheDay(lang);
+                updateQuote(dailyQuote);
+            } else if (isLoading) {
+                updateQuote({ titulo: "", descricao: uiTranslations[lang].loading });
+            }
+            
+            // Atualizar os botões de idioma
+            const languageButtons = document.querySelectorAll('.language-btn');
+            languageButtons.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Armazenar a preferência do usuário
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Função para exibir a data atual no idioma especificado
+        function displayCurrentDate(lang) {
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', options);
+            document.getElementById('current-date').textContent = now.toLocaleDateString(
+                lang === 'pt' ? 'pt-BR' : (lang === 'es' ? 'es-ES' : 'en-US'), 
+                dateFormatOptions[lang]
+            );
         }
 
         // Função para selecionar uma citação com base na data
-        function getQuoteOfTheDay() {
-            if (quotesData.length === 0) return { titulo: "", descricao: "Carregando..." };
+        function getQuoteOfTheDay(lang) {
+            if (!quotes[lang] || quotes[lang].length === 0) {
+                return { titulo: "", descricao: uiTranslations[lang].loading };
+            }
             
             const today = new Date();
             const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            const quoteIndex = dayOfYear % quotesData.length;
-            return quotesData[quoteIndex];
+            const quoteIndex = dayOfYear % quotes[lang].length;
+            return quotes[lang][quoteIndex];
         }
 
         // Função para exibir uma citação aleatória
-        function getRandomQuote() {
-            if (quotesData.length === 0) return { titulo: "", descricao: "Carregando..." };
+        function getRandomQuote(lang) {
+            if (!quotes[lang] || quotes[lang].length === 0) {
+                return { titulo: "", descricao: uiTranslations[lang].loading };
+            }
             
-            const randomIndex = Math.floor(Math.random() * quotesData.length);
-            return quotesData[randomIndex];
+            const randomIndex = Math.floor(Math.random() * quotes[lang].length);
+            return quotes[lang][randomIndex];
         }
 
         // Função para atualizar a citação na página
         function updateQuote(quote) {
-            document.getElementById('quote-text').textContent = quote.description;
-            document.getElementById('quote-title').textContent = quote.title;
+            document.getElementById('quote-text').textContent = quote.descricao;
+            document.getElementById('quote-title').textContent = quote.titulo;
         }
 
         // Inicializar a página
-        window.onload = function() {
-            displayCurrentDate();
-            loadQuotes();
+        window.onload = async function() {
+            // Verificar se há uma preferência de idioma salva
+            let preferredLanguage = localStorage.getItem('preferredLanguage');
+            
+            // Se não houver preferência salva, detectar idioma do navegador
+            if (!preferredLanguage) {
+                preferredLanguage = detectBrowserLanguage();
+            }
+            
+            // Definir idioma atual
+            currentLanguage = preferredLanguage;
+            
+            // Atualizar UI para o idioma selecionado
+            updateUI(currentLanguage);
+            
+            // Carregar citações do arquivo JSON
+            await loadQuotes();
+            
+            // Configurar event listeners para os botões de idioma
+            const languageButtons = document.querySelectorAll('.language-btn');
+            languageButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newLang = this.getAttribute('data-lang');
+                    currentLanguage = newLang;
+                    updateUI(newLang);
+                });
+            });
             
             // Adicionar evento ao botão para exibir uma nova citação
             document.getElementById('new-quote').addEventListener('click', function() {
-                const randomQuote = getRandomQuote();
-                updateQuote(randomQuote);
+                if (!isLoading && quotes[currentLanguage]) {
+                    const randomQuote = getRandomQuote(currentLanguage);
+                    updateQuote(randomQuote);
+                }
             });
         };
     </script>
