@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflexão Diária</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .quote-container {
+            margin: 40px 0;
+            position: relative;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+        
+        .quote {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .quote-title {
+            font-weight: 600;
+            font-size: 20px;
+            color: #2980b9;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        .date {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #7f8c8d;
+        }
+        
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+        
+        button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .loading {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reflexão Diária</h1>
+        <p class="subtitle">Uma citação por dia para inspirar sua jornada</p>
+        
+        <div class="date" id="current-date"></div>
+        
+        <div class="quote-container">
+            <p class="quote-title" id="quote-title"></p>
+            <p class="quote" id="quote-text">Carregando citação...</p>
+        </div>
+        
+        <button id="new-quote">Nova Citação</button>
+        
+        <footer>
+            <p>Reflexão Diária &copy; 2025 - Um momento de pausa para contemplação</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variável global para armazenar as citações
+        let quotesData = [];
+        
+        // Função para carregar o arquivo JSON
+        async function loadQuotes() {
+            try {
+                const response = await fetch('quotes.json');
+                const data = await response.json();
+                quotesData = data.citacoes;
+                
+                // Exibir a citação do dia após carregar os dados
+                const dailyQuote = getQuoteOfTheDay();
+                updateQuote(dailyQuote);
+            } catch (error) {
+                console.error('Erro ao carregar as citações:', error);
+                document.getElementById('quote-text').textContent = 'Não foi possível carregar as citações. Por favor, tente novamente mais tarde.';
+            }
+        }
+
+        // Função para exibir a data atual
+        function displayCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', options);
+        }
+
+        // Função para selecionar uma citação com base na data
+        function getQuoteOfTheDay() {
+            if (quotesData.length === 0) return { titulo: "", descricao: "Carregando..." };
+            
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const quoteIndex = dayOfYear % quotesData.length;
+            return quotesData[quoteIndex];
+        }
+
+        // Função para exibir uma citação aleatória
+        function getRandomQuote() {
+            if (quotesData.length === 0) return { titulo: "", descricao: "Carregando..." };
+            
+            const randomIndex = Math.floor(Math.random() * quotesData.length);
+            return quotesData[randomIndex];
+        }
+
+        // Função para atualizar a citação na página
+        function updateQuote(quote) {
+            document.getElementById('quote-text').textContent = quote.description;
+            document.getElementById('quote-title').textContent = quote.title;
+        }
+
+        // Inicializar a página
+        window.onload = function() {
+            displayCurrentDate();
+            loadQuotes();
+            
+            // Adicionar evento ao botão para exibir uma nova citação
+            document.getElementById('new-quote').addEventListener('click', function() {
+                const randomQuote = getRandomQuote();
+                updateQuote(randomQuote);
+            });
+        };
+    </script>
+</body>
+</html>

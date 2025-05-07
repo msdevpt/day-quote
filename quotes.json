@@ -1,0 +1,104 @@
+{
+    "citacoes": [
+      {
+        "id": 1,
+        "title": "Mente Serena",
+        "description": "A paz vem de dentro de você mesmo. Não a procure à sua volta."
+      },
+      {
+        "id": 2,
+        "title": "Persistência",
+        "description": "A persistência é o caminho do êxito."
+      },
+      {
+        "id": 3,
+        "title": "Presente",
+        "description": "Não deixe para amanhã o sorriso que você pode dar hoje."
+      },
+      {
+        "id": 4,
+        "title": "Sabedoria",
+        "description": "Conhecer a si mesmo é o começo de toda sabedoria."
+      },
+      {
+        "id": 5,
+        "title": "Mudança",
+        "description": "Seja a mudança que você deseja ver no mundo."
+      },
+      {
+        "id": 6,
+        "title": "Superação",
+        "description": "A maior glória não é nunca cair, mas sim levantar-se sempre."
+      },
+      {
+        "id": 7,
+        "title": "Caminho",
+        "description": "O caminho é a recompensa."
+      },
+      {
+        "id": 8,
+        "title": "Felicidade",
+        "description": "A felicidade não é algo pronto. Ela vem de suas próprias ações."
+      },
+      {
+        "id": 9,
+        "title": "Humildade",
+        "description": "Quanto mais sei, mais sei que nada sei."
+      },
+      {
+        "id": 10,
+        "title": "Aceitação",
+        "description": "O segredo da felicidade está em olhar todas as maravilhas do mundo e nunca se esquecer da sua própria dignidade."
+      },
+      {
+        "id": 11,
+        "title": "Gratidão",
+        "description": "A gratidão transforma o que temos em suficiente, e mais."
+      },
+      {
+        "id": 12,
+        "title": "Simplicidade",
+        "description": "A simplicidade é o último grau de sofisticação."
+      },
+      {
+        "id": 13,
+        "title": "Silêncio",
+        "description": "No silêncio das suas meditações está a resposta para todas as suas perguntas."
+      },
+      {
+        "id": 14,
+        "title": "Compaixão",
+        "description": "Se você quer que os outros sejam felizes, pratique a compaixão. Se você quer ser feliz, pratique a compaixão."
+      },
+      {
+        "id": 15,
+        "title": "Resiliência",
+        "description": "Você nunca sabe que resultados virão da sua ação. Mas se você não fizer nada, não existirão resultados."
+      },
+      {
+        "id": 16,
+        "title": "Paciência",
+        "description": "A paciência é amarga, mas seus frutos são doces."
+      },
+      {
+        "id": 17,
+        "title": "Equilíbrio",
+        "description": "O equilíbrio não é algo que você encontra, é algo que você cria."
+      },
+      {
+        "id": 18,
+        "title": "Propósito",
+        "description": "O propósito da vida é uma vida com propósito."
+      },
+      {
+        "id": 19,
+        "title": "Transcendência",
+        "description": "Não existe caminho para a paz. A paz é o caminho."
+      },
+      {
+        "id": 20,
+        "title": "Bondade",
+        "description": "Nenhum ato de bondade, por menor que seja, é desperdiçado."
+      }
+    ]
+  }
